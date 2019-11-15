@@ -1,0 +1,45 @@
+body{
+    background-color:#948b85;
+}
+
+.container-fluid{
+    padding: 10px;;
+    border: 3px solid black
+}
+
+.box{
+    background: gray;
+    height: 50vh;
+    width: 100%;
+}
+.btn{
+    
+    border: 1px solid black !important;
+    color: white;
+    
+    
+}
+
+.active{
+    background :rgb(34,95,119);
+    color: white;
+}
+/* .col{
+    /* border: 1px solid gray !important; */
+}
+i{
+}
+
+.center{
+    text-align: center;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+}
+.btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Control Unit</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/0a461ea495.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:#948b85;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col center">
+                <h2>Control Unit</h2>
+            </div>
+        </div>
+            
+        <div class="row">
+            <div class="col center ">
+                <div class="box">
+                    <img src="{{ url_for('video_feed') }}" class="img img-responsive">
+                </div>
+            </div>
+            <div class="col center ">
+                <div class="box">
+                    <img src="static/images/thermal.jpeg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                &nbsp;
+            </p>
+        </div>
+        <div class="row">
+            <div class="col center">
+                <button onClick="sendCommand('spinTankLeft')"  class="btn btn-lg float-left active">
+                    <i class="fa-2x fas fa-arrow-up"></i>
+                </button>
+            </div>
+            <div class="col center center">
+                <button onClick="sendCommand('moveUp')"  class="btn btn-lg active">
+                    <i class="fa-2x far fa-caret-square-up"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="sendCommand('spinTankRight')"  class="btn btn-lg active ">
+                    <i class="fa-2x fas fa-arrow-down"></i>
+                </button>
+            </div>
+            <div class="col center"></div>
+            <div class="col center">
+                <button onClick="sendCommand('lightOn')"  class="btn btn-lg">
+                    <i class="fa-2x far fa-lightbulb"></i>
+                </button>
+            </div>
+            <!-- <div class="col center"></div> -->
+            <div class="col center">
+                <input type="text" id="utd" disabled
+                    class="form-control"
+                    style="vertical-align: middle; 
+                    text-align: center;
+                    height: 100%;
+                    font-size: 15px;
+                    "
+                    value="1.2m">
+            </div>
+            <!-- <div class="col center"></div> -->
+            <div class="col center"></div>
+
+            <div class="col center">
+                <button onClick="sendCommand('')"  class="btn btn-lg float-left">
+                    <i class="fa-2x fas fa-undo"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="sendCommand()"  class="btn btn-lg">
+                    <i class="fa-2x fas fa-caret-square-up"></i>
+                </button></div>
+            <div class="col center">
+                <button onClick=""  class="btn btn-lg float-right ">
+                    <i class="fa-2x fas fa-undo"
+                    style="
+                    transform: scaleX(-1)
+                    "
+                    ></i>
+                </button>
+        </div>
+            
+        </div>
+        <!-- Pad -->
+        <div class="row">
+            <p>
+                &nbsp;
+            </p>
+        </div>
+        <!-- Second ROw -->
+        <div class="row">
+                <div class="col center">
+                    <button onClick="sendCommand('moveLeft')"  class="btn btn-lg float-right active"
+                        style="text-align: right;"
+                    >
+                        <i class="fa-2x far fa-caret-square-left fa-w-12"></i>
+                    </button>
+                </div>
+                <div class="col center">
+                    <button onClick="sendCommand('stopTankMovement')"  class="btn btn-lg active">
+                        <i class="fa-2x far fa-square"></i>
+                    </button>
+                </div>
+                <div class="col center">
+                    <button onClick="sendCommand('moveRight')"  class="btn btn-lg float-left active">
+                        <i class="fa-2x far fa-caret-square-right"></i>
+                    </button>
+                </div>
+                <div class="col center"></div>
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg">
+                            <i class="fa-2x fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+                <!-- <div class="col center"></div> -->
+                <div class="col center">
+                    <input type="text" id="utd" disabled
+                        class="form-control"
+                        style="vertical-align: middle; 
+                        text-align: center;
+                        height: 100%;
+                        font-size: 15px;
+                        "
+                        value="GPS OFF">
+                </div>
+                <!-- <div class="col center"></div> -->
+                <div class="col center"></div>
+    
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg float-right">
+                            <i class="fa-2x fas fa-caret-square-left"></i>
+                    </button>
+                </div>
+                <div class="col center">
+                    <!-- <button onClick="sendCommand('')"  class="btn btn-lg">
+                        <i class="fa-2x fas fa-caret-square-up"></i>
+                    </button> -->
+                </div>
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg float-left">
+                        <i class="fa-2x fas fa-caret-square-right"></i>
+                    </button>
+            </div>
+                
+            </div>
+        <!-- Second Row Ends -->
+        <!-- Pad -->
+        <div class="row">
+            <p>
+                &nbsp;
+            </p>
+        </div>
+        <!-- Third row starts -->
+        <div class="row">
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg float-left">
+                        <i class=" fa-2x fas fa-angle-double-left"></i>
+                        
+                    </button>
+                </div>
+                <div class="col center center">
+                    <button onClick="sendCommand('moveDown')"  class="btn btn-lg active">
+                        <i class="fa-2x far fa-caret-square-down"></i>
+                    </button>
+                </div>
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg">
+                            <i class=" fa-2x fas fa-angle-double-right"></i>
+                    </button>
+                </div>
+                <div class="col center"></div>
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg">
+                        <i class="fa-2x fas fa-wind">
+                            
+                        </i>
+                    </button>
+                </div>
+                <!-- <div class="col center"></div> -->
+                <div class="col center">
+                    <input type="text" id="utd" disabled
+                        class="form-control"
+                        style="vertical-align: middle; 
+                        text-align: center;
+                        height: 100%;
+                        font-size: 15px;
+                        "
+                        value="CO2">
+                </div>
+                <!-- <div class="col center"></div> -->
+                <div class="col center"></div>
+    
+                <div class="col center">
+                    <!-- <button onClick="sendCommand('')"  class="btn btn-lg float-left">
+                        <i class="fa-2x fas fa-undo"></i>
+                    </button> -->
+                </div>
+                <div class="col center">
+                    <button onClick="sendCommand('')"  class="btn btn-lg">
+                        <i class="fa-2x fas fa-caret-square-down"></i>
+                    </button></div>
+                <div class="col center">
+                    <!-- <button onClick="sendCommand('')"  class="btn btn-lg float-right">
+                        <i class="fa-2x fas fa-undo"
+                        style="
+                        transform: scaleX(-1)
+                        "
+                        ></i>
+                    </button> -->
+            </div>
+                
+            </div>
+        <!-- Third row ends -->
+        <div class="row">
+            <p>
+                &nbsp;
+            </p>
+        </div>
+        <div class="row">
+                <p>
+                        &nbsp;
+                    </p>
+        </div>
+        <div class="row"></div>
+
+
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script src="/static/script.js"></script>
+</body>
+</html>
