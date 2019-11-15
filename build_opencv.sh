@@ -45,8 +45,8 @@ mv opencv_contrib-4.1.0/ opencv_contrib
 
 # you have to make python3.6 env so it uses python3.6 for the build
 mkdir -p .virtualenvs
-python3 -m venv .virtualenvs/cv2_env
-source .virtualenvs/cv2_env/bin/activate
+python3 -m venv .virtualenvs/cv
+source .virtualenvs/cv/bin/activate
 
 # took a really long time
 pip3 install numpy
@@ -74,7 +74,7 @@ sudo apt-get update
 cd ~/opencv/build/lib/python3
 mkdir -p ~/lib/cv2
 cp cv2.cpython-37m-arm-linux-gnueabihf.so ~/lib/cv2
-ln -s ~/lib/cv2/cv2.cpython-37m-arm-linux-gnueabihf.so ~/.virtualenvs/cv2_env/lib/python3.7/site-packages/cv2.so
+ln -s ~/lib/cv2/cv2.cpython-37m-arm-linux-gnueabihf.so ~/.virtualenvs/cv/lib/python3.7/site-packages/cv2.so
 
 cd ~
 
