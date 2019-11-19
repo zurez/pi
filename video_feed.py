@@ -1,19 +1,18 @@
 import eventlet
-
-# eventlet.monkey_patch()
-
 from flask import Flask, render_template, Response
-from flask_socketio import SocketIO
-from flask_socketio import emit
-from TankController import *
 from imutils.video import VideoStream
-import imutils
-import threading
-import json
 import cv2
-import argparse
-from imutils.video import FPS
-from flask import render_template
+import os
+import math
+import time
+import busio
+import board
+import numpy as np
+from scipy.interpolate import griddata
+
+from colour import Color
+ 
+import adafruit_amg88xx
 
 app = Flask(__name__)
 outputFrame = None
@@ -29,13 +28,42 @@ print(vs)
 eventlet.sleep(2.0)
 print("[INFO] started...")
 
+print("[INFO] starting thermal cam stream...")
+
+#low range of the sensor (this will be blue on the screen)
+MINTEMP = 26.
+ 
+#high range of the sensor (this will be red on the screen)
+MAXTEMP = 32.
+ 
+#how many color values we can have
+COLORDEPTH = 1024
+ 
+os.putenv('SDL_FBDEV', '/dev/fb1')
+sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
+print(sensor)
+eventlet.sleep(2.0)
 
 
-    
-@app.route('/')
-def controlUnit():
-    return render_template("index.html")
+def constrain(val, min_val, max_val):
+    return min(max_val, max(min_val, val))
+ 
+def map_value(x, in_min, in_max, out_min, out_max):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
+def genThermalFrame():
+    while True:
+        pixels = []
+        for row in sensor.pixels:
+            pixels = pixels + row
+        pixels = [map_value(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
+        bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+        (flag, encodedImage) = cv2.imencode(".jpg", bicubic)
+        if not flag: continue
+        # print (encodedImage)
+        dataFrame = yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
+    pass
 def gen():
     """Video streaming generator function."""
     global dataFrame
@@ -48,6 +76,9 @@ def gen():
         # print (encodedImage)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
+        
+        
+        
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
@@ -55,7 +86,10 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-
+@app.route('/thermal_feed')
+def thermal_feed():
+    return Response(genThermalFrame(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 if __name__ == '__main__':
   
 
