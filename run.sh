@@ -4,6 +4,7 @@ pip3 install imutils
 pip3 install eventlet
 pip3 install numpy
 pip3 install scipy
+pip3 install busio
 pip3 install colour
 pip3 install adafruit-blinka
 sudo pip3 install adafruit-circuitpython-amg88xx
