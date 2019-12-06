@@ -27,7 +27,7 @@ socketio = SocketIO(app,cors_allowed_origins='*')
 motor_init()
 
 #Start Servos
-initializeServos()
+# initializeServos()
 time.sleep(2)
 @socketio.on('command')
 def commandFunction(payload):
