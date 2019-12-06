@@ -87,7 +87,10 @@ def handle_connection():
 
 
 
+#For Servos to move by degrees
 
+def moveServos(axis = "X", direction = "plus"):
+    pass
 if __name__ == '__main__':
   
     # socketio.start_background_task(gen)
