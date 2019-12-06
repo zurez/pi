@@ -67,7 +67,7 @@ def doMoveServos(payload):
     print( payload )
     axis = payload.axis 
     direction = payload.direction
-    moveServos(axis,direction)
+    # moveServos(axis,direction)
 if __name__ == '__main__':
   
     # socketio.start_background_task(gen)
