@@ -71,14 +71,3 @@ def moveServos(axis, direction):
 
 initializeServos()
 
-print(gpios)
-
-moveServos("Z","plus")
-time.sleep(3)
-moveServos("Z","plus")
-time.sleep(3)
-moveServos("Z","minus")
-time.sleep(3)
-moveServos("Z","plus")
-time.sleep(3)
-moveServos("Z","minus")
