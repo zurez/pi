@@ -60,7 +60,7 @@ def moveServos(axis, direction):
         nextPosition += stepSize
     else :
         nextPosition -= stepSize
-    
+    print("[INFO] Moving to degree "+ str(nextPosition))
     dc = (nextPosition/totalDegrees) * maxDC
     if dc < 1: dc = minDC 
     gpios[axis]["currentPosition"] = nextPosition
