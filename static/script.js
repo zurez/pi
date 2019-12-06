@@ -17,6 +17,12 @@ function sendCommand(actionType,params){
     });
 }
 
+function moveServos(axis,direction){
+    socket.emit('moveServos',{
+        axis,
+        direction
+    })
+}
 function receiveUpdate(updateString){
     console.log(updateString);
     
