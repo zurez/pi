@@ -39,15 +39,18 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 def initializeServos():
     for key, values in gpios.items():
-
-        GPIO_PIN = values["gpio"]
-        print("[INFO] Setting up GPIO PIN "+ str(GPIO_PIN))
-        GPIO.setup(GPIO_PIN, GPIO.OUT)
-        temp = GPIO.PWM(GPIO_PIN,50)
-        temp.start(1)
-        gpios[key]["instance"] = temp
+        try:
+            GPIO_PIN = values["gpio"]
+            print("[INFO] Setting up GPIO PIN "+ str(GPIO_PIN))
+            GPIO.setup(GPIO_PIN, GPIO.OUT)
+            temp = GPIO.PWM(GPIO_PIN,50)
+            temp.start(1)
+            gpios[key]["instance"] = temp
        
-        gpios[key]["state"] = "running"
+            gpios[key]["state"] = "running"
+        except expression as identifier:
+            pass
+
         
 def moveServos(axis, direction):
     gpio = gpios[axis]
