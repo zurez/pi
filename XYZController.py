@@ -38,12 +38,39 @@ gpios = {
 GPIO.setmode(GPIO.BCM)
 def initializeServos():
     for key, values in gpios.items():
+
         GPIO_PIN = values["gpio"]
         GPIO.setup(GPIO_PIN, GPIO.OUT)
         temp = GPIO.PWM(GPIO_PIN,50)
         temp.start(1)
         gpios[key]["instance"] = temp
+       
+        gpios[key]["state"] = "running"
         
+def moveServos(axis, direction):
+    gpio = gpios[axis]
+    gpioInstance = gpio["instance"]
+    nextPosition = gpio["currentPosition"]
+    stepSize = gpio["stepSize"]
+    totalDegrees = gpio["total_degrees"]
+    maxDC = gpio["maxDC"]
+    
+    if direction ==  "plus":
+        nextPosition += stepSize
+    else :
+        nextPosition -= stepSize
+    
+    dc = (nextPosition/totalDegrees) * maxDC
+    if dc < 1: dc = minDC 
+    
+    gpioInstance.ChangeDutyCycle(dc)
+    pass
+
+
 initializeServos()
 
 print(gpios)
+
+moveServos("Z",30)
+time.pause(0.4)
+moveServos("Z",70)
