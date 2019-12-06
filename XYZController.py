@@ -54,7 +54,7 @@ def moveServos(axis, direction):
     stepSize = gpio["stepSize"]
     totalDegrees = gpio["total_degrees"]
     maxDC = gpio["maxDC"]
-    
+    minDC = gpio["minDC"]
     if direction ==  "plus":
         nextPosition += stepSize
     else :
