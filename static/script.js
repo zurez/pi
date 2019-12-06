@@ -18,19 +18,15 @@ function sendCommand(actionType,params){
 }
 
 function moveServos(axis,direction){
-    socket.emit('moveServos',{
-        axis,
-        direction
+    $.ajax({
+        url: "/moveServos",
+        data: {
+            axis,
+            direction
+        },
+        method: "post",
+        success: function(r){
+            console.log("Success")
+        }
     })
 }
-function receiveUpdate(updateString){
-    console.log(updateString);
-    
-}
-
-function onRecieveUSBCamFeed( data ){
-    console.log(data);
-    
-}
-socket.on("update",receiveUpdate);
-socket.on("usbCamera", onRecieveUSBCamFeed)
