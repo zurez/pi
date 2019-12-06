@@ -72,5 +72,5 @@ initializeServos()
 print(gpios)
 
 moveServos("Z",30)
-time.pause(0.4)
+time.sleep(3)
 moveServos("Z",70)
