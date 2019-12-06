@@ -63,7 +63,7 @@ def moveServos(axis, direction):
     
     dc = (nextPosition/totalDegrees) * maxDC
     if dc < 1: dc = minDC 
-    gpio[axix]["currentPosition"] = nextPosition
+    gpio[axis]["currentPosition"] = nextPosition
     gpioInstance.ChangeDutyCycle(dc)
     pass
 
