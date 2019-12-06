@@ -70,5 +70,4 @@ def moveServos(axis, direction):
     pass
 
 
-initializeServos()
 
