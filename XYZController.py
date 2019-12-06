@@ -26,7 +26,7 @@ gpios = {
     "Z":{
         "gpio":26,
         "currentPosition":0,
-        "stepSize":5,
+        "stepSize":30,
         "state": "stopped",
         "total_degrees": 180,
         "maxDC":13,
