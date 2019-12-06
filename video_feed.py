@@ -87,7 +87,9 @@ def gen():
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
         
-        
+@app.route('/')
+def controlUnit():	
+    return render_template("index.html")
         
 @app.route('/video_feed')
 def video_feed():
