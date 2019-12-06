@@ -9,7 +9,7 @@ import busio
 import board
 import numpy as np
 from scipy.interpolate import griddata
-
+from XYZController import initializeServos, moveServos
 from colour import Color
  
 import adafruit_amg88xx
@@ -54,7 +54,9 @@ grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
 
 eventlet.sleep(2.0)
 
-
+print("[Initialising Servos]")
+initializeServos()
+time.sleep(2)
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
  
@@ -103,6 +105,15 @@ def thermal_feed():
     if is_i2c == False: return "False"
     return Response(genThermalFrame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+    
+@app.route('/moveServos', methods= ["POST"])
+def moveServos():
+    
+    body = request.form
+    print(body)
+    axis = body.axis 
+    direction = body.direction
+    moveServos(axis, direction)
 if __name__ == '__main__':
   
 
