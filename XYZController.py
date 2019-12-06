@@ -38,8 +38,9 @@ gpios = {
 GPIO.setmode(GPIO.BCM)
 def initializeServos():
     for key, values in gpios.items():
-        
-        temp = GPIO.PWM(values["gpio"],50)
+        GPIO_PIN = values["gpio"]
+        GPIO.setup(GPIO_PIN, GPIO.OUT)
+        temp = GPIO.PWM(GPIO_PIN,50)
         temp.start(1)
         gpios[key]["instance"] = temp
         
