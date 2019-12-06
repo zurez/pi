@@ -100,7 +100,7 @@ def video_feed():
 
 @app.route('/thermal_feed')
 def thermal_feed():
-    if is_i2c == False: return False
+    if is_i2c == False: return "False"
     return Response(genThermalFrame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 if __name__ == '__main__':
