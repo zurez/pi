@@ -36,6 +36,7 @@ gpios = {
     }
 }
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 def initializeServos():
     for key, values in gpios.items():
 
@@ -74,3 +75,9 @@ print(gpios)
 moveServos("Z",30)
 time.sleep(3)
 moveServos("Z",70)
+time.sleep(3)
+moveServos("Z",90)
+time.sleep(3)
+moveServos("Z",110)
+time.sleep(3)
+moveServos("Z",130)
