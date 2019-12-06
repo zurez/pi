@@ -41,6 +41,7 @@ def initializeServos():
     for key, values in gpios.items():
 
         GPIO_PIN = values["gpio"]
+        print("[INFO] Setting up GPIO PIN "+ str(GPIO_PIN))
         GPIO.setup(GPIO_PIN, GPIO.OUT)
         temp = GPIO.PWM(GPIO_PIN,50)
         temp.start(1)
