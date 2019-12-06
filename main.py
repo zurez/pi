@@ -6,6 +6,7 @@ from flask import Flask, render_template, Response
 from flask_socketio import SocketIO
 from flask_socketio import emit
 from TankController import *
+from XYZController import *
 from imutils.video import VideoStream
 import imutils
 import threading
@@ -25,7 +26,8 @@ socketio = SocketIO(app,cors_allowed_origins='*')
 # Start Tank
 motor_init()
 
-
+#Start Servos
+initializeServos()
 @socketio.on('command')
 def commandFunction(payload):
     
@@ -88,13 +90,15 @@ def handle_connection():
 
 
 #For Servos to move by degrees
-
-def moveServos(axis = "X", direction = "plus"):
-    pass
+@socketio.on('moveServos')
+def doMoveServos(payload):
+    axis = payload.axis 
+    direction = payload.direction
+    moveServos(axis,direction)
 if __name__ == '__main__':
   
     # socketio.start_background_task(gen)
-    socketio.run(app,debug=True, use_reloader=False)
+    socketio.run(app,debug=True, use_reloader=False,host="0.0.0.0")
     # app.run(host='0.0.0.0', port =8000, debug=False, threaded=True)
 
 # vs.stop()
