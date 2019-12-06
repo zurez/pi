@@ -28,6 +28,7 @@ motor_init()
 
 #Start Servos
 initializeServos()
+time.sleep(2)
 @socketio.on('command')
 def commandFunction(payload):
     
@@ -50,36 +51,6 @@ def commandFunction(payload):
         pass
     elif command == "spinTankLeft" :
         spin_left(1)
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
-        pass
-    elif command == "" :
         pass
 
 @socketio.on('connect')
