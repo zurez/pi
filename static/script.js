@@ -1,4 +1,4 @@
-var socket = io("http://127.0.0.1:5000");
+var socket = io("http://192.168.1.92:5000");
 socket.on('connect', function() {
     //Reset the socket buffer if reconnection happens
     socket.sendBuffer.length = 0;
