@@ -92,6 +92,8 @@ def handle_connection():
 #For Servos to move by degrees
 @socketio.on('moveServos')
 def doMoveServos(payload):
+    print("Received Payload")
+    print( payload )
     axis = payload.axis 
     direction = payload.direction
     moveServos(axis,direction)
