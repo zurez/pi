@@ -40,9 +40,15 @@ MAXTEMP = 32.
 COLORDEPTH = 1024
  
 os.putenv('SDL_FBDEV', '/dev/fb1')
-i2c_bus = busio.I2C(board.SCL, board.SDA)
-sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
-print(sensor)
+is_i2c = False
+try:
+    i2c_bus = busio.I2C(board.SCL, board.SDA)
+    sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
+    is_i2c = True
+    print(sensor)
+except :
+    pass
+
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
 
@@ -92,6 +98,7 @@ def video_feed():
 
 @app.route('/thermal_feed')
 def thermal_feed():
+    if !is_i2c: return False
     return Response(genThermalFrame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 if __name__ == '__main__':
