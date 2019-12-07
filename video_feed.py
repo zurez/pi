@@ -111,8 +111,8 @@ def moveServos():
     
     body = request.form
     print(body)
-    axis = body.axis 
-    direction = body.direction
+    axis = body["axis"] 
+    direction = body["direction"]
     moveServos(axis, direction)
 if __name__ == '__main__':
   
