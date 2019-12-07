@@ -64,6 +64,7 @@ def moveServos(axis, direction):
         nextPosition += stepSize
     else :
         nextPosition -= stepSize
+    if  nextPosition > 180 or nextPosition < 0 : return False
     print("[INFO] Moving to degree "+ str(nextPosition))
     dc = (nextPosition/totalDegrees) * maxDC
     if dc < 1: dc = minDC 
