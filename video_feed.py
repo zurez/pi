@@ -1,5 +1,5 @@
 import eventlet
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 from imutils.video import VideoStream
 import cv2
 import os
