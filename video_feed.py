@@ -114,6 +114,7 @@ def doMoveServos():
     axis = body["axis"] 
     direction = body["direction"]
     moveServos(axis, direction)
+    return "success"
 if __name__ == '__main__':
   
 
