@@ -107,7 +107,7 @@ def thermal_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
     
 @app.route('/moveServos', methods= ["POST"])
-def moveServos():
+def doMoveServos():
     
     body = request.form
     print(body)
