@@ -49,6 +49,7 @@ def initializeServos():
        
             gpios[key]["state"] = "running"
         except expression as identifier:
+            print(iden)
             pass
 
         
@@ -70,7 +71,7 @@ def moveServos(axis, direction):
     if dc < 1: dc = minDC 
     gpios[axis]["currentPosition"] = nextPosition
     print("[INFO] Passing DC Value "+ str(dc))
-    #gpioInstance.ChangeDutyCycle(dc)
+    gpioInstance.ChangeDutyCycle(dc)
     pass
 
 
