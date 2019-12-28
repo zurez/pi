@@ -63,13 +63,57 @@
                     class="form-control"
                     style="vertical-align: middle; 
                     text-align: center;
+                    width: 50%;
                     height: 100%;
                     font-size: 15px;
                     "
                     value="1.2m">
+                    
             </div>
             <!-- <div class="col center"></div> -->
-            <div class="col center"></div>
+            
+
+
+            <div class="col center">
+                <div class="input-group mb-3"
+                    style="width: 75%;"
+                >
+                    
+                    <input type="text" class="form-control disabled" 
+                        id="humidity"
+                        disabled
+                        value="76"
+                    >
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">
+                      
+                            <i class="fas fa-tint ci" aria-hidden="true" style="font-size: 25px;"></i>
+                        </span>
+                      </div>
+                  </div>
+                  
+                    
+            </div>
+            <div class="col center">
+                <div class="input-group mb-3"
+                    style="width: 75%;"
+                >
+                    
+                    <input type="text" class="form-control disabled" 
+                        id="temperature"
+                        disabled
+                        value="13°C"
+                    >
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa fa-thermometer-half ci" aria-hidden="true" style="font-size: 25px;"></i>
+
+                        </span>
+                      </div>
+                  </div>
+                  
+                    
+            </div>
 
             <div class="col center">
                 <button onClick="sendCommand('')"  class="btn btn-lg float-left">
@@ -118,23 +162,43 @@
                 </div>
                 <div class="col center"></div>
                 <div class="col center">
-                    <button onClick="sendCommand('')"  class="btn btn-lg">
+                    <button onClick=""  class="btn btn-lg">
                             <i class="fa-2x fas fa-map-marker-alt"></i>
                     </button>
                 </div>
                 <!-- <div class="col center"></div> -->
                 <div class="col center">
-                    <input type="text" id="utd" disabled
+                    <button onClick="showMap()"  class="btn btn-lg float-left active">
+                        
+                        <i class="fa-2x fas fa-map-marked-alt"></i>
+                    </button>
+                </div>
+                <div class="col center">
+                    <input type="text"  disabled
+                        id="latitude"
                         class="form-control"
                         style="vertical-align: middle; 
                         text-align: center;
+                        height: 100%;
+                        width: 75%;
+                        font-size: 15px;
+                        "
+                        value="GPS OFF">
+                </div>
+                <div class="col center">
+                    <input type="text"  disabled
+                        id="longitude"
+                        class="form-control"
+                        style="vertical-align: middle; 
+                        text-align: center;
+                        width: 75%;
                         height: 100%;
                         font-size: 15px;
                         "
                         value="GPS OFF">
                 </div>
-                <!-- <div class="col center"></div> -->
-                <div class="col center"></div>
+                <!-- <div class="col center"></div>
+                <div class="col center"></div> -->
     
                 <div class="col center">
                     <button onClick="moveServos('X','minus')"  class="btn btn-lg float-right active">
@@ -188,16 +252,25 @@
                 </div>
                 <!-- <div class="col center"></div> -->
                 <div class="col center">
-                    <input type="text" id="utd" disabled
+                    <input type="text" disabled
                         class="form-control"
                         style="vertical-align: middle; 
                         text-align: center;
                         height: 100%;
                         font-size: 15px;
                         "
-                        value="CO2">
+                        value="CO2: 23">
                 </div>
-                <!-- <div class="col center"></div> -->
+                <div class="col center">
+                    <input type="text" disabled
+                        class="form-control"
+                        style="vertical-align: middle; 
+                        text-align: center;
+                        height: 100%;
+                        font-size: 15px;
+                        "
+                        value="tVOC: 45">
+                </div>
                 <div class="col center"></div>
     
                 <div class="col center">
@@ -231,6 +304,28 @@
 
 
     </div>
+
+    <!-- Google Map -->
+    <div id="map" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Map</h4>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" id="gmap">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
     <script
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -245,7 +340,9 @@
 
 
     }
-
+    function showMap(){
+        $("#map").modal("show");
+    }
     function moveServos(axis,direction){
         console.log(`Moving Servos on ${axis} in ${direction}`)
         $.ajax({
@@ -258,9 +355,79 @@
             success: function(r){
                 console.log("Success")
             }
-        })
-}
+    })
+    }
 
+        // Long Polling (Recommened Technique - Creates An Open Connection To Server ∴ Fast)
+
+    (function poll() {
+        $.ajax({
+        url: "/dht11",
+        type: "GET",
+        success: function(data) {
+            if( data ){
+                var temperature = data.temperature;
+                var humidity = data.humidity;
+                if( temperature && !isNaN(temperature)){
+                    $("#temperature").val(temperature+ "°C");
+                }
+                if( humidity && !isNaN(humidity)){
+                    $("#humidity").val(humidity);
+                }
+            }
+        },
+        dataType: "json",
+        complete: setTimeout(function() {poll()}, 10000),
+        timeout: 2000
+    })
+    })();
+
+    $('.modal').on('shown.bs.modal', function() {
+        var longitude = $("#longitude").val().split(":")[1];
+        var latitude = $("#latitude").val().split(":")[1];
+        var key = `AIzaSyBxOJp7v9Wo_58yVXtVtcz3yEs-nnvJW-4`;
+        if ( !longitude || !latitude){
+            alert("GPS data is not valid");
+            //return ;
+        }
+        var url = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=8&size=450x300&maptype=terrain&key=${key}&sensor=false`;
+        // var url = `https://maps.google.com/?q=${latitude},${longitude}`
+        var url = `https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=${key}`;
+        $(this).find('img').attr('src',url)
+    });  
+
+    
+    (function poll() {
+        $.ajax({
+        url: "/gps",
+        type: "GET",
+        success: function(data) {
+            if( data ){
+                var longitude = data.longitude;
+                var latitude = data.latitude;
+                var display = "";
+                if( longitude && !isNaN(longitude)){
+                     $("#longitude").val(`Lng: ${longitude}`);
+                }else {
+                    $("#longitude").val(`Lng: N/A`);
+                }
+
+                if( latitude && !isNaN(latitude)){
+                    $("#latitude").val(`Lat:${latitude}`);
+                   
+                    
+                }else{
+                    $("#latitude").val(`Lat: N/A`);
+                }
+                
+
+            }
+        },
+        dataType: "json",
+        complete: setTimeout(function() {poll()}, 10000),
+        timeout: 2000
+    })
+    })();
 </script>
 </body>
 </html>

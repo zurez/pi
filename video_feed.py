@@ -5,6 +5,8 @@ import cv2
 import os
 import math
 import time
+import random
+"""
 import busio
 import board
 import numpy as np
@@ -13,8 +15,9 @@ from XYZController import initializeServos, moveServos
 from colour import Color
  
 import adafruit_amg88xx
-
+"""
 app = Flask(__name__)
+"""
 outputFrame = None
 
 
@@ -77,7 +80,7 @@ def genThermalFrame():
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
     pass
 def gen():
-    """Video streaming generator function."""
+   
     global dataFrame
     while True:
         frame = vs.read()
@@ -88,14 +91,14 @@ def gen():
         # print (encodedImage)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
-        
+"""     
 @app.route('/')
 def controlUnit():	
     return render_template("index.html")
-        
+
 @app.route('/video_feed')
 def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
+    #Video streaming route. Put this in the src attribute of an img tag.
     return Response(gen(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -115,9 +118,21 @@ def doMoveServos():
     direction = body["direction"]
     moveServos(axis, direction)
     return "success"
+
+@app.route('/dht11')
+def dht11():
+    return {"temperature":random.randint(-10,80),"humidity":random.randint(10,90)}
+
+@app.route('/gps')
+def gps():
+    return {"latitude":12.3,"longitude":-13.44}
+
+@app.route('/gas')
+def gas():
+    return { "CO2":12}
 if __name__ == '__main__':
   
 
-    app.run(host='0.0.0.0', port =1991, debug=False, threaded=True)
+    app.run(host='0.0.0.0', port =1991, debug=True, threaded=True)
 
 # vs.stop()

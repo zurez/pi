@@ -1,6 +1,6 @@
 var socket = io("http://192.168.1.92:5000");
 socket.on('connect', function() {
-    socket.emit('my event', {data: 'I\'m connected!'});
+    socket.emit('connect', {data: 'I\'m connected!'});
 });
 
 function sendCommand(actionType,params){
