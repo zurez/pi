@@ -6,7 +6,7 @@ import os
 import math
 import time
 import random
-"""
+
 import busio
 import board
 import numpy as np
@@ -15,9 +15,9 @@ from XYZController import initializeServos, moveServos
 from colour import Color
  
 import adafruit_amg88xx
-"""
+
 app = Flask(__name__)
-"""
+
 outputFrame = None
 
 
@@ -91,7 +91,7 @@ def gen():
         # print (encodedImage)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
-"""     
+  
 @app.route('/')
 def controlUnit():	
     return render_template("index.html")
