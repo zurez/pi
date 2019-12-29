@@ -121,7 +121,7 @@ def doMoveServos():
 
 @app.route('/dht11')
 def dht11():
-    return jsonfiy*{"temperature":random.randint(-10,80),"humidity":random.randint(10,90)})
+    return jsonfiy({"temperature":random.randint(-10,80),"humidity":random.randint(10,90)})
 
 @app.route('/gps')
 def gps():
