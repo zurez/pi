@@ -1,5 +1,5 @@
 import eventlet
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request,jsonify
 from imutils.video import VideoStream
 import cv2
 import os
@@ -121,11 +121,11 @@ def doMoveServos():
 
 @app.route('/dht11')
 def dht11():
-    return {"temperature":random.randint(-10,80),"humidity":random.randint(10,90)}
+    return jsonfiy*{"temperature":random.randint(-10,80),"humidity":random.randint(10,90)})
 
 @app.route('/gps')
 def gps():
-    return {"latitude":12.3,"longitude":-13.44}
+    return jsonfiy({"latitude":12.3,"longitude":-13.44})
 
 @app.route('/gas')
 def gas():
