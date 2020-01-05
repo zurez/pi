@@ -171,7 +171,7 @@ def gps():
 def gas():
     
     try:
-       return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
+       return  jsonify({ "co2":sgp30.eCO2,"tvoc": sgp30.TVOC})
     except :
         pass
     return  jsonify({ "co2":400,"tvoc": 0})
