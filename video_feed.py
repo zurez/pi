@@ -56,23 +56,27 @@ COLORDEPTH = 1024
 os.putenv('SDL_FBDEV', '/dev/fb1')
 is_i2c = False
 try:
+    print("[INFO] Initialized I2C")
     i2c_bus = busio.I2C(board.SCL, board.SDA)
     is_i2c = True
 except expression as identifier:
-    
+    print("[ERROR] I2C failed")
     pass
 try:
-    
+    print("[INFO] Initialized AMG88XX")
     sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
     print(sensor)
     
 except :
+    print("[ERROR] AMG88XX failed")
     pass
 try:
+    print("[INFO] Initialized SGP30")
     sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
   
     print(sgp30)
 except  Exception as e:
+    print("[ERROR] SGP30 failed")
     print(e)
     pass
 if is_i2c == True:
@@ -165,7 +169,7 @@ def gps():
 
 @app.route('/gas')
 def gas():
-    print(sgp30)
+    
     try:
        return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
     except :
