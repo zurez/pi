@@ -6,7 +6,7 @@ import os
 import math
 import time
 import random
-
+import Adafruit_DHT
 import busio
 import board
 import numpy as np
@@ -84,7 +84,14 @@ if is_i2c == True:
     sgp30.iaq_init()
     sgp30.set_iaq_baseline(0x8973, 0x8aae)
     time.sleep(2)
+try:
+    print(["[INFO]  Initialising DHT11"])
+    DHT_SENSOR = Adafruit_DHT.DHT11
+    DHT_PIN = 26
 
+except Exception:
+    print("[ERROR] DHT11 failed")
+    pass
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
 
@@ -156,7 +163,12 @@ def doMoveServos():
 
 @app.route('/dht11')
 def dht11():
-    return jsonify({"temperature":random.randint(-10,80),"humidity":random.randint(10,90)})
+    try:
+        humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+        return jsonify({"temperature":temperature,"humidity":humidity})
+    except Exception:
+        pass
+    
 
 @app.route('/gps')
 def gps():
