@@ -253,23 +253,25 @@
                 <!-- <div class="col center"></div> -->
                 <div class="col center">
                     <input type="text" disabled
+                        id= "co2"
                         class="form-control"
                         style="vertical-align: middle; 
                         text-align: center;
                         height: 100%;
                         font-size: 15px;
                         "
-                        value="CO2: 23">
+                        value="--">
                 </div>
                 <div class="col center">
                     <input type="text" disabled
+                        id="tvoc"
                         class="form-control"
                         style="vertical-align: middle; 
                         text-align: center;
                         height: 100%;
                         font-size: 15px;
                         "
-                        value="tVOC: 45">
+                        value="--">
                 </div>
                 <div class="col center"></div>
     
@@ -418,6 +420,39 @@
                     
                 }else{
                     $("#latitude").val(`Lat: N/A`);
+                }
+                
+
+            }
+        },
+        dataType: "json",
+        complete: setTimeout(function() {poll()}, 10000),
+        timeout: 2000
+    })
+    })();
+
+        
+    (function poll() {
+        $.ajax({
+        url: "/gas",
+        type: "GET",
+        success: function(data) {
+            if( data ){
+                var co2 = data.co2;
+                var tvoc = data.tvoc;
+                var display = "";
+                if( co2 && !isNaN(co2)){
+                     $("#co2").val(`CO2: ${co2}`);
+                }else {
+                    $("#co2").val(`CO2: 400`);
+                }
+
+                if( tvoc && !isNaN(tvoc)){
+                    $("#tvoc").val(`tVOC:${tvoc}`);
+                   
+                    
+                }else{
+                    $("#tvoc").val(`tVOC: 0`);
                 }
                 
 

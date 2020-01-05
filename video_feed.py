@@ -13,7 +13,15 @@ import numpy as np
 from scipy.interpolate import griddata
 from XYZController import initializeServos, moveServos
 from colour import Color
- 
+#GPS
+import sys
+import pynmea2
+import serial
+
+#Gas
+import adafruit_sgp30
+
+# ?
 import adafruit_amg88xx
 
 app = Flask(__name__)
@@ -21,7 +29,10 @@ app = Flask(__name__)
 outputFrame = None
 
 
-
+#Initialize GPS 
+#warmpup 
+print("[INFO] Initializing GPS ")
+ser = serial.Serial("/dev/ttyAMA0",9600, 8, 'N', 1, timeout=1) 
 
 # initialize the video stream and allow the camera sensor to
 # warmup
@@ -47,10 +58,17 @@ is_i2c = False
 try:
     i2c_bus = busio.I2C(board.SCL, board.SDA)
     sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
+    sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
     is_i2c = True
     print(sensor)
 except :
     pass
+
+if is_i2c == True:
+    print("[INFO] Initialising Gas Sensors")
+    sgp30.iaq_init()
+    sgp30.set_iaq_baseline(0x8973, 0x8aae)
+    time.sleep(2)
 
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
@@ -125,11 +143,23 @@ def dht11():
 
 @app.route('/gps')
 def gps():
-    return jsonify({"latitude":12.3,"longitude":-13.44})
+    data = ser.readline()
+    if sys.version_info[0] == 3:
+        data = data.decode("utf-8","ignore")
+    if data[0:6] == '$GPGLL':
+        newmsg=pynmea2.parse(data)
+        return jsonify({"status":"success","latitude":newmsg.latitude, "longitude":newmsg.longitude})
+    else:
+        return jsonify({"status":"error","latitude":"--", "longitude":"--"})
 
 @app.route('/gas')
 def gas():
-    return { "CO2":12}
+    try:
+       return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
+    except expression as identifier:
+        pass
+    return  jsonify({ "CO2":400,"tvoc": 0})
+    
 if __name__ == '__main__':
   
 
