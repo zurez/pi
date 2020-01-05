@@ -170,7 +170,7 @@ def gas():
        return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
     except :
         pass
-    return  jsonify({ "CO2":400,"tvoc": 0})
+    return  jsonify({ "co2":400,"tvoc": 0})
     
 if __name__ == '__main__':
   
