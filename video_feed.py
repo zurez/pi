@@ -57,14 +57,24 @@ os.putenv('SDL_FBDEV', '/dev/fb1')
 is_i2c = False
 try:
     i2c_bus = busio.I2C(board.SCL, board.SDA)
-    sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
-    sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
     is_i2c = True
+except expression as identifier:
+    
+    pass
+try:
+    
+    sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
     print(sensor)
-    print(sgp30)
+    
 except :
     pass
-
+try:
+    sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
+  
+    print(sgp30)
+except  Exception as e:
+    print(e)
+    pass
 if is_i2c == True:
     print("[INFO] Initialising Gas Sensors")
     sgp30.iaq_init()
