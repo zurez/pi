@@ -155,6 +155,7 @@ def gps():
 
 @app.route('/gas')
 def gas():
+    print(sgp30)
     try:
        return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
     except :
