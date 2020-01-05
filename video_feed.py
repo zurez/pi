@@ -61,6 +61,7 @@ try:
     sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c_bus)
     is_i2c = True
     print(sensor)
+    print(sgp30)
 except :
     pass
 
@@ -156,7 +157,7 @@ def gps():
 def gas():
     try:
        return  jsonify({ "CO2":sgp30.eCO2,"tvoc": sgp30.TVOC})
-    except expression as identifier:
+    except :
         pass
     return  jsonify({ "CO2":400,"tvoc": 0})
     
