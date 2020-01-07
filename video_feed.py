@@ -85,9 +85,10 @@ if is_i2c == True:
     sgp30.set_iaq_baseline(0x8973, 0x8aae)
     time.sleep(2)
 try:
-    print(["[INFO]  Initialising DHT11"])
+    
     DHT_SENSOR = Adafruit_DHT.DHT11
     DHT_PIN = 18
+    print("[INFO]  Initialising DHT11" )
 
 except Exception:
     print("[ERROR] DHT11 failed")
@@ -164,9 +165,11 @@ def doMoveServos():
 @app.route('/dht11')
 def dht11():
     try:
+        print(DHT_PIN)
         humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
         return jsonify({"temperature":temperature,"humidity":humidity})
-    except Exception:
+    except Exception e:
+        print(e)
         pass
     
 
