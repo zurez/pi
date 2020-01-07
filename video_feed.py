@@ -168,7 +168,7 @@ def dht11():
         print(DHT_PIN)
         humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
         return jsonify({"temperature":temperature,"humidity":humidity})
-    except Exception e:
+    except Exception as e:
         print(e)
         pass
     
