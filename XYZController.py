@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 gpios = {
     "X":{
-        "gpio":12,
+        "gpio":18,
         "currentPosition":0,
         "stepSize":5,
         "state": "stopped",
