@@ -87,7 +87,7 @@ if is_i2c == True:
 try:
     print(["[INFO]  Initialising DHT11"])
     DHT_SENSOR = Adafruit_DHT.DHT11
-    DHT_PIN = 26
+    DHT_PIN = 18
 
 except Exception:
     print("[ERROR] DHT11 failed")
