@@ -178,6 +178,8 @@ def gps():
     data = ser.readline()
     if sys.version_info[0] == 3:
         data = data.decode("utf-8","ignore")
+        print("[INFO] GPS READ DATA")
+        print(data)
     if data[0:6] == '$GPGLL' or data[0:6] == '$GPRMC':
         newmsg=pynmea2.parse(data)
         return jsonify({"status":"success","latitude":newmsg.latitude, "longitude":newmsg.longitude})
