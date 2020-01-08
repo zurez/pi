@@ -404,6 +404,7 @@
         url: "/gps",
         type: "GET",
         success: function(data) {
+            if ( data.status === "error") return false;
             if( data ){
                 var longitude = data.longitude;
                 var latitude = data.latitude;
