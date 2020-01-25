@@ -387,14 +387,14 @@
     $('.modal').on('shown.bs.modal', function() {
         var longitude = $("#longitude").val().split(":")[1];
         var latitude = $("#latitude").val().split(":")[1];
-        var key = `AIzaSyBxOJp7v9Wo_58yVXtVtcz3yEs-nnvJW-4`;
+        var key = ``;
         if ( !longitude || !latitude){
             alert("GPS data is not valid");
             //return ;
         }
         var url = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=8&size=450x300&maptype=terrain&key=${key}&sensor=false`;
         // var url = `https://maps.google.com/?q=${latitude},${longitude}`
-        var url = `https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=${key}`;
+        //var url = `https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=${key}`;
         $(this).find('img').attr('src',url)
     });  
 
@@ -404,6 +404,7 @@
         url: "/gps",
         type: "GET",
         success: function(data) {
+            if ( data.status === "error") return false;
             if( data ){
                 var longitude = data.longitude;
                 var latitude = data.latitude;
