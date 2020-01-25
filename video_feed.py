@@ -55,7 +55,6 @@ COLORDEPTH = 1024
  
 os.putenv('SDL_FBDEV', '/dev/fb1')
 is_i2c = False
-sgp30 = { "iaq_init": False}
 try:
     print("[INFO] Initialized I2C")
     i2c_bus = busio.I2C(board.SCL, board.SDA)
@@ -81,10 +80,16 @@ except  Exception as e:
     print(e)
     pass
 if is_i2c == True:
-    print("[INFO] Initialising Gas Sensors")
-    sgp30.iaq_init()
-    sgp30.set_iaq_baseline(0x8973, 0x8aae)
-    time.sleep(2)
+    try:
+        print("[INFO] Initialising Gas Sensors")
+        sgp30.iaq_init()
+        sgp30.set_iaq_baseline(0x8973, 0x8aae)
+        time.sleep(2)
+        pass
+    except Exception as e:
+        print("[ERROR] Gas Sensor Failed")
+        pass
+
 try:
     
     DHT_SENSOR = Adafruit_DHT.DHT11
