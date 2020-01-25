@@ -55,6 +55,7 @@ COLORDEPTH = 1024
  
 os.putenv('SDL_FBDEV', '/dev/fb1')
 is_i2c = False
+sgp30 = {}
 try:
     print("[INFO] Initialized I2C")
     i2c_bus = busio.I2C(board.SCL, board.SDA)
