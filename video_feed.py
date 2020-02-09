@@ -18,7 +18,7 @@ from datetime import datetime
 import sys
 import pynmea2
 import serial
-
+import subprocess
 #Gas
 import adafruit_sgp30
 
