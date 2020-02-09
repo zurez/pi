@@ -221,7 +221,7 @@ def video_record_handler():
         command = "raspivid -o - -t 0 | tee "+file_name+".h264 "
         # start
         print("starting record "+ command)
-        os.spawnl(os.P_DETACH, command)
+        os.spawnl(os.P_NOWAIT, command)
     return video_child_process
         
 if __name__ == '__main__':
