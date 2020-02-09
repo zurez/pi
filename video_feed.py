@@ -29,7 +29,9 @@ app = Flask(__name__)
 
 outputFrame = None
 
-
+# For Video Recording Purposes
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('vibralert_test001.avi', fourcc, 20)
 #Initialize GPS 
 #warmpup 
 print("[INFO] Initializing GPS ")
