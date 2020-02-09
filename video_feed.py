@@ -214,14 +214,14 @@ def video_record_handler():
         # Pause or Stop
         print("pausing the video")
         print(video_child_process)
-        os.kill(video_child_process, 9)
+        video_child_process.kill()
         pass
     else:
         file_name = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         command = "raspivid -o - -t 0 | tee "+file_name+".h264 "
         # start
         print("starting record "+ command)
-        os.spawnl(os.P_NOWAIT, command)
+        subprocess.Popen(command)
     return video_child_process
         
 if __name__ == '__main__':
