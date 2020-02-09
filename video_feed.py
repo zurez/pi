@@ -210,7 +210,7 @@ def gas():
 def video_record_handler():
     
     print("video_recording")
-    if video_child_process == 0:
+    if video_child_process != 0:
         # Pause or Stop
         print("pausing the video")
         print(video_child_process)
