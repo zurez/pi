@@ -13,6 +13,7 @@ import numpy as np
 from scipy.interpolate import griddata
 from XYZController import initializeServos, moveServos
 from colour import Color
+from datetime import datetime
 #GPS
 import sys
 import pynmea2
@@ -107,11 +108,15 @@ eventlet.sleep(2.0)
 print("[Initialising Servos]")
 initializeServos()
 time.sleep(2)
+
+video_child_process = 0
+
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
  
 def map_value(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 
 def genThermalFrame():
     if 'sensor' not in locals():
@@ -201,6 +206,21 @@ def gas():
         pass
     return  jsonify({ "co2":400,"tvoc": 0})
     
+@app.route('/video_recording')
+def video_record_handler():
+    
+    
+    if video_child_process == 0:
+        # Pause or Stop
+        os.kill(video_child_process, 9)
+        pass
+    else:
+        file_name = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        command = "raspivid -o - -t 0 | tee "+file_name+".h264 "
+        # start
+        os.spawnl(os.P_DETACH, command)
+    return video_child_process
+        
 if __name__ == '__main__':
   
 
