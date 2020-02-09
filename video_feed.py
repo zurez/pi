@@ -217,7 +217,7 @@ def video_record_handler():
         video_child_process.kill()
         pass
     else:
-        file_name = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        file_name = datetime.now().strftime("%d/%m/%Y-%H:%M:%S")
         command = "raspivid -o - -t 0 | tee "+file_name+".h264 "
         # start
         print("starting record "+ command)
