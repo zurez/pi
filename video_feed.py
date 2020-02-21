@@ -30,7 +30,7 @@ app = Flask(__name__)
 
 outputFrame = None
 
-
+recording = False
 #Initialize GPS 
 #warmpup 
 print("[INFO] Initializing GPS ")
@@ -220,19 +220,14 @@ def gas():
 def video_record_handler():
     
     print("video_recording")
-    if video_child_process != 0:
+    if recording == True:
         # Pause or Stop
         print("pausing the video")
-        print(video_child_process)
-        video_child_process.kill()
+        recording = False
         pass
     else:
-        file_name = datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
-        command = "raspivid -o - -t 0 | tee "+file_name+".h264 "
-        # start
-        print("starting record "+ command)
-        subprocess.Popen(command)
-    return video_child_process
+        recording = True
+    return recording
         
 if __name__ == '__main__':
   
