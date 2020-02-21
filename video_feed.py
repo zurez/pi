@@ -47,7 +47,7 @@ print("[INFO] started...")
 # zeros array
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
 writer = None
-(h, w) = (300, 300)
+(h, w) = (225, 300)
 zeros = None
 writer = cv2.VideoWriter('test.avi', fourcc, 30,(w * 2, h * 2), True)
 print("[INFO] starting thermal cam stream...")
