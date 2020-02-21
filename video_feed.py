@@ -44,7 +44,7 @@ eventlet.sleep(2.0)
 print("[INFO] started...")
 # initialize the FourCC, video writer, dimensions of the frame, and
 # zeros array
-fourcc = cv2.VideoWriter_fourcc(*args["codec"])
+fourcc = cv2.VideoWriter_fourcc('MJPG')
 writer = None
 (h, w) = (None, None)
 zeros = None
