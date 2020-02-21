@@ -39,17 +39,18 @@ ser = serial.Serial("/dev/ttyAMA0",9600, 8, 'N', 1, timeout=1)
 # initialize the video stream and allow the camera sensor to
 # warmup
 print("[INFO] starting video stream...")
-vs = VideoStream(src=-1,framerate = 30).start()
-print(vs)
-eventlet.sleep(2.0)
+# vs = VideoStream(src=-1,framerate = 30).start()
+# print(vs)
+
 print("[INFO] started...")
 # initialize the FourCC, video writer, dimensions of the frame, and
 # zeros array
+cap = cv2.VideoCapture(0)
+
+# Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-writer = None
-(h, w) = (225, 300)
-zeros = None
-writer = cv2.VideoWriter('test.avi', fourcc, 30,(w * 2, h * 2), True)
+out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
+eventlet.sleep(2.0)
 print("[INFO] starting thermal cam stream...")
 
 #low range of the sensor (this will be blue on the screen)
@@ -143,17 +144,18 @@ def genThermalFrame():
 def gen():
    
     global dataFrame
-    while True:
-        frame = vs.read()
-        frame = imutils.resize(frame, width=300, height=225)
-        
+    while cap.isOpened:
+        # frame = vs.read()
+        # frame = imutils.resize(frame, width=300, height=225)
+        ret, frame = cap.read()
         (flag, encodedImage) = cv2.imencode(".jpg", frame)
         if not flag: continue
         # print (encodedImage)
         if recording == True:
-            (h, w) = frame.shape[:2]
+            # (h, w) = frame.shape[:2]
             # print(h,w)
-            writer.write(frame)
+            print('Writing')
+            out.write(frame)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
   
