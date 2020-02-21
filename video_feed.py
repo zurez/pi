@@ -227,7 +227,7 @@ def video_record_handler():
         pass
     else:
         recording = True
-    return recording
+    return 'success'
         
 if __name__ == '__main__':
   
