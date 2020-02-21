@@ -29,9 +29,7 @@ app = Flask(__name__)
 
 outputFrame = None
 
-# For Video Recording Purposes
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('vibralert_test001.avi', fourcc, 20)
+
 #Initialize GPS 
 #warmpup 
 print("[INFO] Initializing GPS ")
@@ -44,6 +42,12 @@ vs = VideoStream(src=-1,framerate = 30).start()
 print(vs)
 eventlet.sleep(2.0)
 print("[INFO] started...")
+# initialize the FourCC, video writer, dimensions of the frame, and
+# zeros array
+fourcc = cv2.VideoWriter_fourcc(*args["codec"])
+writer = None
+(h, w) = (None, None)
+zeros = None
 
 print("[INFO] starting thermal cam stream...")
 
@@ -140,11 +144,15 @@ def gen():
     global dataFrame
     while True:
         frame = vs.read()
-        # frame = imutils.resize(frame, width=400)
+        frame = imutils.resize(frame, width=300)
         
         (flag, encodedImage) = cv2.imencode(".jpg", frame.copy())
         if not flag: continue
         # print (encodedImage)
+        if recording == True:
+            (h, w) = frame.shape[:2]
+		    writer = cv2.VideoWriter('test.avi', fourcc, 30),
+			(w * 2, h * 2), True)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
   
