@@ -151,8 +151,7 @@ def gen():
         # print (encodedImage)
         if recording == True:
             (h, w) = frame.shape[:2]
-		    writer = cv2.VideoWriter('test.avi', fourcc, 30),
-			(w * 2, h * 2), True)
+            writer = cv2.VideoWriter('test.avi', fourcc, 30,(w * 2, h * 2), True)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
   
