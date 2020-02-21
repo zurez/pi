@@ -218,7 +218,7 @@ def gas():
     
 @app.route('/video_recording')
 def video_record_handler():
-    
+    global recording
     print("video_recording")
     if recording == True:
         # Pause or Stop
