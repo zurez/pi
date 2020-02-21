@@ -228,9 +228,9 @@ def video_record_handler():
         print("pausing the video")
         recording = False
         print("[INFO] cleaning up...")
+        cap.release()
+        out.release()
         cv2.destroyAllWindows()
-        vs.stop()
-        writer.release()
     else:
         recording = True
     return 'success'
