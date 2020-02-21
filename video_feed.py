@@ -47,9 +47,9 @@ print("[INFO] started...")
 # zeros array
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
 writer = None
-(h, w) = (None, None)
+(h, w) = (300, 300)
 zeros = None
-
+writer = cv2.VideoWriter('test.avi', fourcc, 30,(w * 2, h * 2), True)
 print("[INFO] starting thermal cam stream...")
 
 #low range of the sensor (this will be blue on the screen)
@@ -147,12 +147,13 @@ def gen():
         frame = vs.read()
         frame = imutils.resize(frame, width=300)
         
-        (flag, encodedImage) = cv2.imencode(".jpg", frame.copy())
+        (flag, encodedImage) = cv2.imencode(".jpg", frame)
         if not flag: continue
         # print (encodedImage)
         if recording == True:
             (h, w) = frame.shape[:2]
-            writer = cv2.VideoWriter('test.avi', fourcc, 30,(w * 2, h * 2), True)
+            print(h,w)
+            writer.write(frame)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
   
