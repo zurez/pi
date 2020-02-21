@@ -223,12 +223,14 @@ def gas():
 def video_record_handler():
     global recording
     print("video_recording")
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
     if recording == True:
         # Pause or Stop
         print("pausing the video")
         recording = False
         print("[INFO] cleaning up...")
-        cap.release()
+        # cap.release()
         out.release()
         cv2.destroyAllWindows()
     else:
