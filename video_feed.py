@@ -145,14 +145,14 @@ def gen():
     global dataFrame
     while True:
         frame = vs.read()
-        frame = imutils.resize(frame, width=300)
+        frame = imutils.resize(frame, width=300, height=225)
         
         (flag, encodedImage) = cv2.imencode(".jpg", frame)
         if not flag: continue
         # print (encodedImage)
         if recording == True:
             (h, w) = frame.shape[:2]
-            print(h,w)
+            # print(h,w)
             writer.write(frame)
         dataFrame = yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
