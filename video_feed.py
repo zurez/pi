@@ -229,7 +229,6 @@ def video_record_handler():
         cv2.destroyAllWindows()
         vs.stop()
         writer.release()
-                pass
     else:
         recording = True
     return 'success'
