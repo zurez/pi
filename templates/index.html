@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Control Unit</title>
     <link rel="stylesheet" href="/static/styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/0a461ea495.js" crossorigin="anonymous"></script>
 </head>
+
 <body style="background-color:#948b85;">
     <div class="container-fluid">
         <div class="row">
@@ -17,12 +20,17 @@
                 <h2>Control Unit</h2>
             </div>
         </div>
-            
+
         <div class="row">
             <div class="col center ">
                 <div class="box">
                     <img src="{{ url_for('video_feed') }}" class="img img-responsive">
                 </div>
+                <div class="panel" style="display: none;margin-top: 2px;" id="videoPanel">
+                    <button class="btn btn-sm active" id="recordVideoButton" onclick="recordPauseVideo()">Record
+                        Video</button>
+                </div>
+
             </div>
             <div class="col center ">
                 <div class="box">
@@ -37,103 +45,83 @@
         </div>
         <div class="row">
             <div class="col center">
-                <button onClick="sendCommand('spinTankLeft')"  class="btn btn-lg float-left active">
+                <button onClick="sendCommand('spinTankLeft')" class="btn btn-lg float-left active">
                     <i class="fa-2x fas fa-arrow-up"></i>
                 </button>
             </div>
             <div class="col center center">
-                <button onClick="sendCommand('moveUp')"  class="btn btn-lg active">
+                <button onClick="sendCommand('moveUp')" class="btn btn-lg active">
                     <i class="fa-2x far fa-caret-square-up"></i>
                 </button>
             </div>
             <div class="col center">
-                <button onClick="sendCommand('spinTankRight')"  class="btn btn-lg active ">
+                <button onClick="sendCommand('spinTankRight')" class="btn btn-lg active ">
                     <i class="fa-2x fas fa-arrow-down"></i>
                 </button>
             </div>
             <div class="col center"></div>
             <div class="col center">
-                <button onClick="sendCommand('lightOn')"  class="btn btn-lg">
+                <button onClick="sendCommand('lightOn')" class="btn btn-lg">
                     <i class="fa-2x far fa-lightbulb"></i>
                 </button>
             </div>
             <!-- <div class="col center"></div> -->
             <div class="col center">
-                <input type="text" id="utd" disabled
-                    class="form-control"
-                    style="vertical-align: middle; 
+                <input type="text" id="utd" disabled class="form-control" style="vertical-align: middle; 
                     text-align: center;
                     width: 50%;
                     height: 100%;
                     font-size: 15px;
-                    "
-                    value="1.2m">
-                    
+                    " value="1.2m">
+
             </div>
             <!-- <div class="col center"></div> -->
-            
-
 
             <div class="col center">
-                <div class="input-group mb-3"
-                    style="width: 75%;"
-                >
-                    
-                    <input type="text" class="form-control disabled" 
-                        id="humidity"
-                        disabled
-                        value="76"
-                    >
+                <div class="input-group mb-3" style="width: 75%;">
+
+                    <input type="text" class="form-control disabled" id="humidity" disabled value="76">
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon1">
-                      
+
                             <i class="fas fa-tint ci" aria-hidden="true" style="font-size: 25px;"></i>
                         </span>
-                      </div>
-                  </div>
-                  
-                    
+                    </div>
+                </div>
+
             </div>
             <div class="col center">
-                <div class="input-group mb-3"
-                    style="width: 75%;"
-                >
-                    
-                    <input type="text" class="form-control disabled" 
-                        id="temperature"
-                        disabled
-                        value="13°C"
-                    >
+                <div class="input-group mb-3" style="width: 75%;">
+
+                    <input type="text" class="form-control disabled" id="temperature" disabled value="13°C">
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon1">
                             <i class="fa fa-thermometer-half ci" aria-hidden="true" style="font-size: 25px;"></i>
 
                         </span>
-                      </div>
-                  </div>
-                  
-                    
+                    </div>
+                </div>
+
             </div>
 
             <div class="col center">
-                <button onClick="sendCommand('')"  class="btn btn-lg float-left">
+                <button onClick="sendCommand('')" class="btn btn-lg float-left">
                     <i class="fa-2x fas fa-undo"></i>
                 </button>
             </div>
             <div class="col center">
-                <button onClick="moveServos('Y','plus')"  class="btn btn-lg active">
+                <button onClick="moveServos('Y','plus')" class="btn btn-lg active">
                     <i class="fa-2x fas fa-caret-square-up"></i>
-                </button></div>
-            <div class="col center">
-                <button onClick=""  class="btn btn-lg float-right ">
-                    <i class="fa-2x fas fa-undo"
-                    style="
-                    transform: scaleX(-1)
-                    "
-                    ></i>
                 </button>
-        </div>
-            
+            </div>
+            <div class="col center">
+                <button onClick="" class="btn btn-lg float-right ">
+                    <i class="fa-2x fas fa-undo" style="
+                    transform: scaleX(-1)
+                    "></i>
+                </button>
+            </div>
+
         </div>
         <!-- Pad -->
         <div class="row">
@@ -143,80 +131,71 @@
         </div>
         <!-- Second ROw -->
         <div class="row">
-                <div class="col center">
-                    <button onClick="sendCommand('moveLeft')"  class="btn btn-lg float-right active"
-                        style="text-align: right;"
-                    >
-                        <i class="fa-2x far fa-caret-square-left fa-w-12"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <button onClick="sendCommand('stopTankMovement')"  class="btn btn-lg active">
-                        <i class="fa-2x far fa-square"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <button onClick="sendCommand('moveRight')"  class="btn btn-lg float-left active">
-                        <i class="fa-2x far fa-caret-square-right"></i>
-                    </button>
-                </div>
-                <div class="col center"></div>
-                <div class="col center">
-                    <button onClick=""  class="btn btn-lg">
-                            <i class="fa-2x fas fa-map-marker-alt"></i>
-                    </button>
-                </div>
-                <!-- <div class="col center"></div> -->
-                <div class="col center">
-                    <button onClick="showMap()"  class="btn btn-lg float-left active">
-                        
-                        <i class="fa-2x fas fa-map-marked-alt"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <input type="text"  disabled
-                        id="latitude"
-                        class="form-control"
-                        style="vertical-align: middle; 
+            <div class="col center">
+                <button onClick="sendCommand('moveLeft')" class="btn btn-lg float-right active"
+                    style="text-align: right;">
+                    <i class="fa-2x far fa-caret-square-left fa-w-12"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="sendCommand('stopTankMovement')" class="btn btn-lg active">
+                    <i class="fa-2x far fa-square"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="sendCommand('moveRight')" class="btn btn-lg float-left active">
+                    <i class="fa-2x far fa-caret-square-right"></i>
+                </button>
+            </div>
+            <div class="col center"></div>
+            <div class="col center">
+                <button onClick="" class="btn btn-lg">
+                    <i class="fa-2x fas fa-map-marker-alt"></i>
+                </button>
+            </div>
+            <!-- <div class="col center"></div> -->
+            <div class="col center">
+                <button onClick="showMap()" class="btn btn-lg float-left active">
+
+                    <i class="fa-2x fas fa-map-marked-alt"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <input type="text" disabled id="latitude" class="form-control" style="vertical-align: middle; 
                         text-align: center;
                         height: 100%;
                         width: 75%;
                         font-size: 15px;
-                        "
-                        value="GPS OFF">
-                </div>
-                <div class="col center">
-                    <input type="text"  disabled
-                        id="longitude"
-                        class="form-control"
-                        style="vertical-align: middle; 
+                        " value="GPS OFF">
+            </div>
+            <div class="col center">
+                <input type="text" disabled id="longitude" class="form-control" style="vertical-align: middle; 
                         text-align: center;
                         width: 75%;
                         height: 100%;
                         font-size: 15px;
-                        "
-                        value="GPS OFF">
-                </div>
-                <!-- <div class="col center"></div>
+                        " value="GPS OFF">
+            </div>
+            <!-- <div class="col center"></div>
                 <div class="col center"></div> -->
-    
-                <div class="col center">
-                    <button onClick="moveServos('X','minus')"  class="btn btn-lg float-right active">
-                            <i class="fa-2x fas fa-caret-square-left"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <!-- <button onClick="sendCommand('')"  class="btn btn-lg">
+
+            <div class="col center">
+                <button onClick="moveServos('X','minus')" class="btn btn-lg float-right active">
+                    <i class="fa-2x fas fa-caret-square-left"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <!-- <button onClick="sendCommand('')"  class="btn btn-lg">
                         <i class="fa-2x fas fa-caret-square-up"></i>
                     </button> -->
-                </div>
-                <div class="col center">
-                    <button onClick="moveServos('X','plus')"  class="btn btn-lg float-left active">
-                        <i class="fa-2x fas fa-caret-square-right"></i>
-                    </button>
             </div>
-                
+            <div class="col center">
+                <button onClick="moveServos('X','plus')" class="btn btn-lg float-left active">
+                    <i class="fa-2x fas fa-caret-square-right"></i>
+                </button>
             </div>
+
+        </div>
         <!-- Second Row Ends -->
         <!-- Pad -->
         <div class="row">
@@ -226,71 +205,64 @@
         </div>
         <!-- Third row starts -->
         <div class="row">
-                <div class="col center">
-                    <button onClick="sendCommand('')"  class="btn btn-lg float-left">
-                        <i class=" fa-2x fas fa-angle-double-left"></i>
-                        
-                    </button>
-                </div>
-                <div class="col center center">
-                    <button onClick="sendCommand('moveDown')"  class="btn btn-lg active">
-                        <i class="fa-2x far fa-caret-square-down"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <button onClick="sendCommand('')"  class="btn btn-lg">
-                            <i class=" fa-2x fas fa-angle-double-right"></i>
-                    </button>
-                </div>
-                <div class="col center"></div>
-                <div class="col center">
-                    <button onClick="sendCommand('')"  class="btn btn-lg">
-                        <i class="fa-2x fas fa-wind">
-                            
-                        </i>
-                    </button>
-                </div>
-                <!-- <div class="col center"></div> -->
-                <div class="col center">
-                    <input type="text" disabled
-                        id= "co2"
-                        class="form-control"
-                        style="vertical-align: middle; 
-                        text-align: center;
-                        height: 100%;
-                        font-size: 15px;
-                        "
-                        value="--">
-                </div>
-                <div class="col center">
-                    <input type="text" disabled
-                        id="tvoc"
-                        class="form-control"
-                        style="vertical-align: middle; 
-                        text-align: center;
-                        height: 100%;
-                        font-size: 15px;
-                        "
-                        value="--">
-                </div>
-                <div class="col center"></div>
-    
-                <div class="col center">
-                    <button onClick="moveServos('Z','minus')"  class="btn btn-lg float-right active">
-                        <i class="fa fa-2x fa-minus" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="col center">
-                    <button onClick="moveServos('Y','minus')"  class="btn btn-lg active">
-                        <i class="fa-2x fas fa-caret-square-down"></i>
-                    </button></div>
-                <div class="col center">
-                    <button onClick="moveServos('Z','plus')"  class="btn btn-lg float-left active">
-                        <i class="fa fa-2x fa-plus" aria-hidden="true"></i>
-                    </button>
-                </div>
-                
+            <div class="col center">
+                <button onClick="sendCommand('')" class="btn btn-lg float-left">
+                    <i class=" fa-2x fas fa-angle-double-left"></i>
+
+                </button>
             </div>
+            <div class="col center center">
+                <button onClick="sendCommand('moveDown')" class="btn btn-lg active">
+                    <i class="fa-2x far fa-caret-square-down"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="sendCommand('')" class="btn btn-lg">
+                    <i class=" fa-2x fas fa-angle-double-right"></i>
+                </button>
+            </div>
+            <div class="col center"></div>
+            <div class="col center">
+                <button onClick="sendCommand('')" class="btn btn-lg">
+                    <i class="fa-2x fas fa-wind">
+
+                    </i>
+                </button>
+            </div>
+            <!-- <div class="col center"></div> -->
+            <div class="col center">
+                <input type="text" disabled id="co2" class="form-control" style="vertical-align: middle; 
+                        text-align: center;
+                        height: 100%;
+                        font-size: 15px;
+                        " value="--">
+            </div>
+            <div class="col center">
+                <input type="text" disabled id="tvoc" class="form-control" style="vertical-align: middle; 
+                        text-align: center;
+                        height: 100%;
+                        font-size: 15px;
+                        " value="--">
+            </div>
+            <div class="col center"></div>
+
+            <div class="col center">
+                <button onClick="moveServos('Z','minus')" class="btn btn-lg float-right active">
+                    <i class="fa fa-2x fa-minus" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="moveServos('Y','minus')" class="btn btn-lg active">
+                    <i class="fa-2x fas fa-caret-square-down"></i>
+                </button>
+            </div>
+            <div class="col center">
+                <button onClick="moveServos('Z','plus')" class="btn btn-lg float-left active">
+                    <i class="fa fa-2x fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
         <!-- Third row ends -->
         <div class="row">
             <p>
@@ -298,172 +270,204 @@
             </p>
         </div>
         <div class="row">
-                <p>
-                        &nbsp;
-                    </p>
+            <p>
+                &nbsp;
+            </p>
         </div>
         <div class="row"></div>
-
 
     </div>
 
     <!-- Google Map -->
     <div id="map" class="modal fade" role="dialog">
         <div class="modal-dialog">
-      
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Map</h4>
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Map</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="" id="gmap">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <img src="" alt="" id="gmap">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-      
+
         </div>
-      </div>
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-<!-- <script src="/static/script.js"></script> -->
-<script>
-    function sendCommand(actionType,params){
-    // console.log(actionType);
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+        integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <!-- <script src="/static/script.js"></script> -->
+    <script>
+        var onMousOverBox = false;
+        var isVideoBeingRecorded = false
+        $(document).ready(function () {
+            $('.box').mouseover(function () {
+                if (!onMousOverBox) {
+                    onMousOverBox = true;
+                    $('#videoPanel').show();
+                }
+                if (onMousOverBox) {
+                    setTimeout(function () {
+                        onMousOverBox = false;
+                        $('#videoPanel').hide();
+                    }, 15000)
+                }
+            })
+        })
 
+        function sendCommand(actionType, params) {
+            // console.log(actionType);
 
-    }
-    function showMap(){
-        $("#map").modal("show");
-    }
-    function moveServos(axis,direction){
-        console.log(`Moving Servos on ${axis} in ${direction}`)
-        $.ajax({
-            url: "/moveServos",
-            data: {
-                axis,
-                direction
-            },
-            method: "post",
-            success: function(r){
-                console.log("Success")
+        }
+
+        function recordPauseVideo() {
+
+            isVideoBeingRecorded = !isVideoBeingRecorded;
+            if (isVideoBeingRecorded) {
+                $('#recordVideoButton').text('Stop');
+            } else {
+                $('#recordVideoButton').text('Record');
             }
-    })
-    }
+        }
+
+        function showMap() {
+            $("#map").modal("show");
+        }
+
+        function moveServos(axis, direction) {
+            console.log(`Moving Servos on ${axis} in ${direction}`)
+            $.ajax({
+                url: "/moveServos",
+                data: {
+                    axis,
+                    direction
+                },
+                method: "post",
+                success: function (r) {
+                    console.log("Success")
+                }
+            })
+        }
 
         // Long Polling (Recommened Technique - Creates An Open Connection To Server ∴ Fast)
 
-    (function poll() {
-        $.ajax({
-        url: "/dht11",
-        type: "GET",
-        success: function(data) {
-            if( data ){
-                var temperature = data.temperature;
-                var humidity = data.humidity;
-                if( temperature && !isNaN(temperature)){
-                    $("#temperature").val(temperature+ "°C");
-                }
-                if( humidity && !isNaN(humidity)){
-                    $("#humidity").val(humidity);
-                }
+        (function poll() {
+            $.ajax({
+                url: "/dht11",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        var temperature = data.temperature;
+                        var humidity = data.humidity;
+                        if (temperature && !isNaN(temperature)) {
+                            $("#temperature").val(temperature + "°C");
+                        }
+                        if (humidity && !isNaN(humidity)) {
+                            $("#humidity").val(humidity);
+                        }
+                    }
+                },
+                dataType: "json",
+                complete: setTimeout(function () {
+                    poll()
+                }, 120000),
+                timeout: 12000
+            })
+        })();
+
+        $('.modal').on('shown.bs.modal', function () {
+            var longitude = $("#longitude").val().split(":")[1];
+            var latitude = $("#latitude").val().split(":")[1];
+            var key = ``;
+            if (!longitude || !latitude) {
+                alert("GPS data is not valid");
+                //return ;
             }
-        },
-        dataType: "json",
-        complete: setTimeout(function() {poll()}, 120000),
-        timeout: 12000
-    })
-    })();
+            var url =
+                `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=8&size=450x300&maptype=terrain&key=${key}&sensor=false`;
+            // var url = `https://maps.google.com/?q=${latitude},${longitude}`
+            //var url = `https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=${key}`;
+            $(this).find('img').attr('src', url)
+        });
 
-    $('.modal').on('shown.bs.modal', function() {
-        var longitude = $("#longitude").val().split(":")[1];
-        var latitude = $("#latitude").val().split(":")[1];
-        var key = ``;
-        if ( !longitude || !latitude){
-            alert("GPS data is not valid");
-            //return ;
-        }
-        var url = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=8&size=450x300&maptype=terrain&key=${key}&sensor=false`;
-        // var url = `https://maps.google.com/?q=${latitude},${longitude}`
-        //var url = `https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=${key}`;
-        $(this).find('img').attr('src',url)
-    });  
+        (function poll() {
+            $.ajax({
+                url: "/gps",
+                type: "GET",
+                success: function (data) {
+                    if (data.status === "error") return false;
+                    if (data) {
+                        var longitude = data.longitude;
+                        var latitude = data.latitude;
+                        var display = "";
+                        if (longitude && !isNaN(longitude)) {
+                            $("#longitude").val(`Lng: ${longitude}`);
+                        } else {
+                            $("#longitude").val(`Lng: N/A`);
+                        }
 
-    
-    (function poll() {
-        $.ajax({
-        url: "/gps",
-        type: "GET",
-        success: function(data) {
-            if ( data.status === "error") return false;
-            if( data ){
-                var longitude = data.longitude;
-                var latitude = data.latitude;
-                var display = "";
-                if( longitude && !isNaN(longitude)){
-                     $("#longitude").val(`Lng: ${longitude}`);
-                }else {
-                    $("#longitude").val(`Lng: N/A`);
-                }
+                        if (latitude && !isNaN(latitude)) {
+                            $("#latitude").val(`Lat:${latitude}`);
 
-                if( latitude && !isNaN(latitude)){
-                    $("#latitude").val(`Lat:${latitude}`);
-                   
-                    
-                }else{
-                    $("#latitude").val(`Lat: N/A`);
-                }
-                
+                        } else {
+                            $("#latitude").val(`Lat: N/A`);
+                        }
 
-            }
-        },
-        dataType: "json",
-        complete: setTimeout(function() {poll()}, 10000),
-        timeout: 2000
-    })
-    })();
+                    }
+                },
+                dataType: "json",
+                complete: setTimeout(function () {
+                    poll()
+                }, 10000),
+                timeout: 2000
+            })
+        })();
 
-        
-    (function poll() {
-        $.ajax({
-        url: "/gas",
-        type: "GET",
-        success: function(data) {
-            if( data ){
-                var co2 = data.co2;
-                var tvoc = data.tvoc;
-                var display = "";
-                if( co2 && !isNaN(co2)){
-                     $("#co2").val(`CO2: ${co2}`);
-                }else {
-                    $("#co2").val(`CO2: 400`);
-                }
+        (function poll() {
+            $.ajax({
+                url: "/gas",
+                type: "GET",
+                success: function (data) {
+                    if (data) {
+                        var co2 = data.co2;
+                        var tvoc = data.tvoc;
+                        var display = "";
+                        if (co2 && !isNaN(co2)) {
+                            $("#co2").val(`CO2: ${co2}`);
+                        } else {
+                            $("#co2").val(`CO2: 400`);
+                        }
 
-                if( tvoc && !isNaN(tvoc)){
-                    $("#tvoc").val(`tVOC:${tvoc}`);
-                   
-                    
-                }else{
-                    $("#tvoc").val(`tVOC: 0`);
-                }
-                
+                        if (tvoc && !isNaN(tvoc)) {
+                            $("#tvoc").val(`tVOC:${tvoc}`);
 
-            }
-        },
-        dataType: "json",
-        complete: setTimeout(function() {poll()}, 15000),
-        timeout: 2000
-    })
-    })();
-</script>
+                        } else {
+                            $("#tvoc").val(`tVOC: 0`);
+                        }
+
+                    }
+                },
+                dataType: "json",
+                complete: setTimeout(function () {
+                    poll()
+                }, 15000),
+                timeout: 2000
+            })
+        })();
+    </script>
 </body>
+
 </html>
