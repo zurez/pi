@@ -29,7 +29,7 @@ import adafruit_amg88xx
 app = Flask(__name__)
 
 outputFrame = None
-
+out = False
 recording = False
 #Initialize GPS 
 #warmpup 
@@ -222,10 +222,11 @@ def gas():
 @app.route('/video_recording')
 def video_record_handler():
     global recording
+    global out
     print("video_recording")
     fileName = 'recordings/output.avi'
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
+    
     if recording == True:
         # Pause or Stop
         print("pausing the video")
@@ -237,7 +238,7 @@ def video_record_handler():
         
     else:
         
-    
+        out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
         recording = True
     return 'success'
         
