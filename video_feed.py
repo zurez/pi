@@ -224,7 +224,8 @@ def video_record_handler():
     global recording
     print("video_recording")
     fileName = 'recordings/'+str(time.time())+'.avi'
-    
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
     if recording == True:
         # Pause or Stop
         print("pausing the video")
@@ -235,8 +236,7 @@ def video_record_handler():
         cv2.destroyAllWindows()
         
     else:
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
+        
     
         recording = True
     return 'success'
