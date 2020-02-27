@@ -332,13 +332,23 @@
             // console.log(actionType);
 
         }
-
+        function p(){
+            $.ajax({
+                type:'get',
+                url:'/video_recording',
+                success: function(r){
+                    console.log(r)
+                }
+            })
+        }
         function recordPauseVideo() {
 
             isVideoBeingRecorded = !isVideoBeingRecorded;
             if (isVideoBeingRecorded) {
+                p();
                 $('#recordVideoButton').text('Stop');
             } else {
+                p();
                 $('#recordVideoButton').text('Record');
             }
         }
