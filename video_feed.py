@@ -224,7 +224,7 @@ def video_record_handler():
     global recording
     print("video_recording")
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter(time.time()+'.avi',fourcc, 20.0, (640,480))
+    out = cv2.VideoWriter('recordings/'+str(time.time())+'.avi',fourcc, 20.0, (640,480))
     if recording == True:
         # Pause or Stop
         print("pausing the video")
