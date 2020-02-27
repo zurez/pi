@@ -223,7 +223,7 @@ def gas():
 def video_record_handler():
     global recording
     print("video_recording")
-    fileName = 'recordings/'+str(time.time())+'.avi'
+    fileName = 'recordings/output.avi'
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
     if recording == True:
