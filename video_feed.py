@@ -224,7 +224,7 @@ def video_record_handler():
     global recording
     global out
     print("video_recording")
-    fileName = 'recordings/output.avi'
+    fileName = 'recordings/'+str(time.time())+'.avi'
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     
     if recording == True:
