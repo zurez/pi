@@ -235,14 +235,14 @@
                         text-align: center;
                         height: 100%;
                         font-size: 15px;
-                        " value="--">
+                        " value="C02:0 ppm">
             </div>
             <div class="col center">
                 <input type="text" disabled id="tvoc" class="form-control" style="vertical-align: middle; 
                         text-align: center;
                         height: 100%;
                         font-size: 15px;
-                        " value="--">
+                        " value="tVOC:0 ppb">
             </div>
             <div class="col center"></div>
 
@@ -456,16 +456,16 @@
                         var tvoc = data.tvoc;
                         var display = "";
                         if (co2 && !isNaN(co2)) {
-                            $("#co2").val(`CO2: ${co2}`);
+                            $("#co2").val(`CO2:${co2} ppn`);
                         } else {
-                            $("#co2").val(`CO2: 400`);
+                            $("#co2").val(`CO2:0 ppm`);
                         }
 
                         if (tvoc && !isNaN(tvoc)) {
-                            $("#tvoc").val(`tVOC:${tvoc}`);
+                            $("#tvoc").val(`tVOC:${tvoc} ppb`);
 
                         } else {
-                            $("#tvoc").val(`tVOC: 0`);
+                            $("#tvoc").val(`tVOC:0 ppb`);
                         }
 
                     }
