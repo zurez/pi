@@ -80,7 +80,7 @@
             <div class="col center">
                 <div class="input-group mb-3" style="width: 75%;">
 
-                    <input type="text" class="form-control disabled" id="humidity" disabled value="76">
+                    <input type="text" class="form-control disabled" id="humidity" disabled value="0%">
                     <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon1">
 
@@ -149,9 +149,9 @@
             </div>
             <div class="col center"></div>
             <div class="col center">
-                <button onClick="" class="btn btn-lg">
+                <!-- <button onClick="" class="btn btn-lg">
                     <i class="fa-2x fas fa-map-marker-alt"></i>
-                </button>
+                </button> -->
             </div>
             <!-- <div class="col center"></div> -->
             <div class="col center">
@@ -223,11 +223,11 @@
             </div>
             <div class="col center"></div>
             <div class="col center">
-                <button onClick="sendCommand('')" class="btn btn-lg">
+                <!-- <button onClick="sendCommand('')" class="btn btn-lg">
                     <i class="fa-2x fas fa-wind">
 
                     </i>
-                </button>
+                </button> -->
             </div>
             <!-- <div class="col center"></div> -->
             <div class="col center">
@@ -386,7 +386,7 @@
                             $("#temperature").val(temperature + "°C");
                         }
                         if (humidity && !isNaN(humidity)) {
-                            $("#humidity").val(humidity);
+                            $("#humidity").val(humidity + "%") ;
                         }
                     }
                 },
