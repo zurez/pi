@@ -254,6 +254,8 @@ def video_list():
 @app.route('/download/<filename>')
 def downloadFileByName(filename):
     return send_from_directory (directory='recordings', filename=filename)
+@app.route('/delete/<filename>')
+    return os.remove('recordings/' + filename)
 if __name__ == '__main__':
   
 
