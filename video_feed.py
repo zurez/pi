@@ -251,7 +251,9 @@ def video_list():
 
     return jsonify({"data": onlyfiles, "status": "success"})
 
-
+@app.route('/download/<filename>')
+def downloadFileByName(filename):
+     send_from_directory(directory='recordings', filename=filename)
 if __name__ == '__main__':
   
 
