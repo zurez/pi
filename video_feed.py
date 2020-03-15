@@ -1,5 +1,5 @@
 import eventlet
-from flask import Flask, render_template, Response, request,jsonify
+from flask import Flask, render_template, Response, request,jsonify, send_from_directory
 from imutils.video import VideoStream
 import imutils
 import cv2
@@ -253,7 +253,7 @@ def video_list():
 
 @app.route('/download/<filename>')
 def downloadFileByName(filename):
-     send_from_directory(directory='recordings', filename=filename)
+     send_from_directory (directory='recordings', filename=filename)
 if __name__ == '__main__':
   
 
