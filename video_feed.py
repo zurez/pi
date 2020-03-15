@@ -256,7 +256,8 @@ def downloadFileByName(filename):
     return send_from_directory (directory='recordings', filename=filename)
 @app.route('/delete/<filename>')
 def delete_video(filename):
-    return os.remove('recordings/' + filename)
+    os.remove('recordings/' + filename)
+    return  jsonify({"status": "success"})
 if __name__ == '__main__':
   
 
