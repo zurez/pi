@@ -24,11 +24,12 @@
         <div class="row">
             <div class="col center ">
                 <div class="box">
-                    <img src="{{ url_for('video_feed') }}" class="img img-responsive">
+                    <img src="{{ url_for('video_feed') }}" class="img img-responsive" style="min-height: 400px; min-width: 400px;">
                 </div>
                 <div class="panel" style="display: none;margin-top: 2px;" id="videoPanel">
                     <button class="btn btn-sm active" id="recordVideoButton" onclick="recordPauseVideo()">Record
                         Video</button>
+                        <button class="btn btn-sm active" id="recordVideoButton" onclick="showAllVideos()">All Videos</button>
                 </div>
 
             </div>
@@ -299,6 +300,42 @@
 
         </div>
     </div>
+<!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">All Videos</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+              <table class = "table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Id</th>
+                          <th>Title</th>
+                          <th>Play</th>
+                          <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody id="videoTbody">
+                      
+                  </tbody>
+              </table>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="hideAllVideos()">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -340,6 +377,45 @@
                     console.log(r)
                 }
             })
+        }
+
+        function deleteVideo(fileName){}
+        function playVideo( url ){
+
+        }
+
+        function videosToHtml(data){
+                 
+            var elem = ``;
+            data.forEach( (element, index) => {
+                elem += `
+                    <tr>
+                    <td>${index + 1}</td>
+                    <td>${element.name}</td>
+                    <td><button class = "btn btn-sm btn-primary" onclick="download('${element.name}')">Download</button></td>
+                    <td><button class = "btn btn-sm btn-danger">Delete</button></td>
+                    </tr>`;
+                
+            });
+            
+            $("#videoTbody").empty();
+            $("#videoTbody").append(elem);
+
+        }
+        function showAllVideos(){
+            $.ajax({
+                type: 'get',
+                url: '/video_list',
+                success: function(response){
+                    var videos = response.data;
+                    videosToHtml(videos)
+                }
+            })
+            $("#videoModal").show();
+        }
+
+        function hideAllVideos(){
+            $("#videoModal").hide();
         }
         function recordPauseVideo() {
 

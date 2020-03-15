@@ -241,7 +241,16 @@ def video_record_handler():
         out = cv2.VideoWriter(fileName,fourcc, 20.0, (640,480))
         recording = True
     return 'success'
-        
+
+@app.route('/video_list')
+def video_list():
+    from os import listdir
+    from os.path import isfile, join
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+    return jsonify({"data": onlyfiles, "status": "success"})
+
+
 if __name__ == '__main__':
   
 
