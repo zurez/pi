@@ -253,7 +253,7 @@ def video_list():
 
 @app.route('/download/<filename>')
 def downloadFileByName(filename):
-     send_from_directory (directory='recordings', filename=filename)
+    return send_from_directory (directory='recordings', filename=filename)
 if __name__ == '__main__':
   
 
