@@ -246,6 +246,7 @@ def video_record_handler():
 def video_list():
     from os import listdir
     from os.path import isfile, join
+    mypath = "recordings"
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
     return jsonify({"data": onlyfiles, "status": "success"})
